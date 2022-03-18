@@ -129,7 +129,7 @@ class Policy(ABC):
     def load_model(self, ep=None):
         """ Loading pre-trained model weights from a file. """
         model_name = Config().algorithm.model_name
-        model_path = f'./models/{model_name}/'
+        model_path = f'./models/{model_name}/nice_models/'
         if ep is not None:
             model_path += 'iter' + str(ep) + '_'
 
