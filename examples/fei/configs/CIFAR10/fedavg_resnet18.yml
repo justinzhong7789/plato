@@ -11,8 +11,10 @@ clients:
     # Should the clients compute test accuracy locally?
     do_test: false
 
-    # Whether simulate clients or not
+    # Whether clients should be simulated with only a sufficient number of processes
     simulation: true
+
+    # Whether client heterogeneity should be simulated
     speed_simulation: true
     
     # Should clients really go to sleep, or should we just simulate the sleep times?
@@ -26,6 +28,8 @@ clients:
 server:
     address: 127.0.0.1
     port: 8000
+    ping_timeout: 3600000
+    ping_interval: 3600000
 
     # Should we operate in sychronous mode?
     synchronous: false
@@ -34,7 +38,7 @@ server:
     simulate_wall_time: true
 
     # What is the minimum number of clients that need to report before aggregation begins?
-    minimum_clients_aggregated: 8
+    minimum_clients_aggregated: 6
 
     # What is the staleness bound, beyond which the server should wait for stale clients?
     staleness_bound: 10

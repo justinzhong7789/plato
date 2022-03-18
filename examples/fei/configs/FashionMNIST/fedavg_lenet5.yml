@@ -25,7 +25,6 @@ clients:
     
     random_seed: 1
 
-
 server:
     address: 127.0.0.1
     port: 8000
