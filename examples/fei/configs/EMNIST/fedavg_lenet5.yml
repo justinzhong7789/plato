@@ -16,7 +16,13 @@ clients:
 
     # Whether client heterogeneity should be simulated
     speed_simulation: true
-    
+
+    # The simulation distribution
+    simulation_distribution:
+        distribution: normal
+        mean: 10
+        sd: 3
+            
     # Should clients really go to sleep, or should we just simulate the sleep times?
     sleep_simulation: true
 
