@@ -119,19 +119,22 @@ class RLAgent(rl_agent.RLAgent):
     def get_reward(self):
         """ Get reward for agent. """
         # punish more time steps
-        reward = -1
+        # reward = -1
+        reward = 0
         # reward for average accuracy in the last a few time steps
         if self.is_done:
-            avg_accuracy = mean(self.pre_acc)
-            reward += math.log(avg_accuracy /
-                               (1 - avg_accuracy)) * Config().algorithm.beta
+            # avg_accuracy = mean(self.pre_acc)
+            # reward += math.log(avg_accuracy /
+                            #    (1 - avg_accuracy)) * Config().algorithm.beta
+            reward = (1 + self.test_accuracy - self.pre_acc[0]) ** Config().algorithm.beta
         return reward
 
     def get_done(self):
         """ Get done condition for agent. """
         if Config().algorithm.mode == 'train':
             self.pre_acc.append(self.test_accuracy)
-            if stdev(self.pre_acc) < Config().algorithm.theta:
+            # if stdev(self.pre_acc) < Config().algorithm.theta:
+            if self.current_step >= 3:
                 logging.info("[RL Agent] Episode #%d ended.",
                              self.current_episode)
                 return True
@@ -152,6 +155,22 @@ class RLAgent(rl_agent.RLAgent):
 
         if Config().algorithm.recurrent_actor:
             self.h, self.c = self.nh, self.nc
+    
+    async def reset(self):
+        """ Reset RL environment. """
+        # Start a new training session
+        logging.info("[RL Agent] Reseting RL environment.")
+
+        # Reset the episode-related variables
+        self.current_step = 0
+        self.is_done = False
+        self.episode_reward = 0
+        self.current_episode += 1
+        # Restart federated learning env when accuracy is stable
+        if stdev(self.pre_acc) < Config().algorithm.theta:
+            self.reset_env = True
+        logging.info("[RL Agent] Starting RL episode #%d.",
+                     self.current_episode)
 
     def update_policy(self):
         """ Update agent if needed in training mode. """
@@ -179,7 +198,7 @@ class RLAgent(rl_agent.RLAgent):
         ])
 
         # Reinitialize the previous accuracy queue
-        for _ in range(5):
+        for _ in range(3):
             self.pre_acc.append(0)
 
         if self.current_episode % Config().algorithm.log_interval == 0:
