@@ -211,8 +211,8 @@ class RLAgent(rl_agent.RLAgent):
         if Config().algorithm.recurrent_actor:
             self.policy.replay_buffer.push(
                 (self.state, self.action, self.reward, self.next_state,
-                 np.float(self.is_done), self.h, self.c, self.nh, self.nc))
+                 np.float32(self.is_done), self.h, self.c, self.nh, self.nc))
         else:
             self.policy.replay_buffer.push(
                 (self.state, self.action, self.reward, self.next_state,
-                 np.float(self.is_done)))
+                 np.float32(self.is_done)))
