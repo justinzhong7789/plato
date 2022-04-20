@@ -372,12 +372,12 @@ class Policy(base.Policy):
             h_0 = torch.zeros(
                 (self.actor.l1.num_layers, 1, self.actor.l1.hidden_size),
                 dtype=torch.float)
-            # h_0 = h_0.to(self.device)
+            h_0 = h_0.to(self.device)
 
             c_0 = torch.zeros(
                 (self.actor.l1.num_layers, 1, self.actor.l1.hidden_size),
                 dtype=torch.float)
-            # c_0 = c_0.to(self.device)
+            c_0 = c_0.to(self.device)
         return (h_0, c_0)
 
     def select_action(self, state, hidden=None, test=False):
