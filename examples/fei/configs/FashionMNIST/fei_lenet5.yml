@@ -112,7 +112,7 @@ algorithm:
     log_interval: 10
     mode: test # test
     pretrained: true
-    pretrained_iter: 130
+    pretrained_iter: 60
     test_step: 100
 
     # RL policy
@@ -131,7 +131,7 @@ algorithm:
     batch_size: 64
     hidden_size: 256
     # steps sampling random actions
-    start_steps: 20
+    start_steps: 100
     # replay memory
     replay_size: 10000
     replay_seed: 1234
