@@ -135,12 +135,12 @@ class Policy(ABC):
 
         logging.info("[RL Agent] Loading a model from %s.", model_path)
 
-        self.actor.load_state_dict(torch.load(model_path + 'actor.pth'))
+        self.actor.load_state_dict(torch.load(model_path + 'actor.pth', map_location=torch.device('cpu')))
         self.actor_optimizer.load_state_dict(
-            torch.load(model_path + 'actor_optimizer.pth'))
-        self.critic.load_state_dict(torch.load(model_path + 'critic.pth'))
+            torch.load(model_path + 'actor_optimizer.pth', map_location=torch.device('cpu')))
+        self.critic.load_state_dict(torch.load(model_path + 'critic.pth', map_location=torch.device('cpu')))
         self.critic_optimizer.load_state_dict(
-            torch.load(model_path + 'critic_optimizer.pth'))
+            torch.load(model_path + 'critic_optimizer.pth', map_location=torch.device('cpu')))
 
     @abstractmethod
     def select_action(self, state, hidden=None, test=False):
