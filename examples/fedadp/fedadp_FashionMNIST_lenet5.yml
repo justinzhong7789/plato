@@ -105,14 +105,11 @@ algorithm:
     # Aggregation algorithm
     type: fedavg
 
-    # Step size for aggregation used in FedAtt
-    epsilon: 1.2
-
-    # The magnitude of normal noise in the randomization mechanism used in FedAtt
-    dp: 0.001
+    # Decreasing rate of the mapping function used in FedAdp
+    alpha: 5
 
 results:
-    result_dir: ./results/FashionMNIST_lenet5/FedAtt
+    result_dir: ./results/FashionMNIST_lenet5/FedAdp
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time

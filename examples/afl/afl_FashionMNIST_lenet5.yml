@@ -1,7 +1,4 @@
 clients:
-    # Type
-    type: simple
-
     # The total number of clients
     total_clients: 100
 
@@ -75,9 +72,6 @@ data:
     random_seed: 1
 
 trainer:
-    # The type of the trainer
-    type: basic
-
     # The maximum number of training rounds
     rounds: 100
 
@@ -105,14 +99,15 @@ algorithm:
     # Aggregation algorithm
     type: fedavg
 
-    # Step size for aggregation used in FedAtt
-    epsilon: 1.2
-
-    # The magnitude of normal noise in the randomization mechanism used in FedAtt
-    dp: 0.001
+    # The proportion of clients with the smallest valuations to be set to negative infinities
+    alpha1: 0.75
+    # The softmax temperature used in distribution
+    alpha2: 0.01
+    # The proportion of clients which are selected uniformly at random
+    alpha3: 0.1
 
 results:
-    result_dir: ./results/FashionMNIST_lenet5/FedAtt
+    result_dir: ./results/FashionMNIST_lenet5/AFL
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time
