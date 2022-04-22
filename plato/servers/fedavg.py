@@ -189,7 +189,7 @@ class Server(base.Server):
                     'round':
                     self.current_round,
                     'accuracy':
-                    self.accuracy,
+                    self.accuracy * 100,
                     'elapsed_time':
                     self.wall_time - self.initial_wall_time,
                     'comm_time':
