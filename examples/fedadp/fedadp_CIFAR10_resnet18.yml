@@ -51,13 +51,13 @@ server:
 
 data:
     # The training and testing dataset
-    datasource: FashionMNIST
+    datasource: CIFAR10
 
     # Where the dataset is located
     data_path: ./data
 
     # Number of samples in each partition
-    partition_size: 200
+    partition_size: 500
 
     # Client's partition size distribution
     # partition_distribution:
@@ -69,7 +69,7 @@ data:
     sampler: iid
 
     # The concentration parameter for the Dirichlet distribution
-    # concentration: 0.5
+    # concentration: 5
 
     # The random seed for sampling data
     random_seed: 1
@@ -79,7 +79,7 @@ trainer:
     type: basic
 
     # The maximum number of training rounds
-    rounds: 100
+    rounds: 250
 
     # Whether the training should use multiple GPUs if available
     parallelized: true
@@ -91,22 +91,30 @@ trainer:
     target_accuracy: 1.0
 
     # Number of epoches for local training in each communication round
-    epochs: 10
-    batch_size: 32
+    epochs: 1
+    batch_size: 128
     optimizer: SGD
-    learning_rate: 0.01
+    learning_rate: 0.1
     momentum: 0.9
-    weight_decay: 0.0
+    weight_decay: 0.0001
+
+    # Learning rate schedule
+    lr_schedule: LambdaLR
+    lr_gamma: 0.1
+    lr_milestone_steps: 80ep,120ep
 
     # The machine learning model
-    model_name: lenet5
+    model_name: resnet_18
 
 algorithm:
     # Aggregation algorithm
     type: fedavg
 
+    # Decreasing rate of the mapping function used in FedAdp
+    alpha: 5
+
 results:
-    result_dir: ./results/FashionMNIST_lenet5/FedAvg
+    result_dir: ./results/CIFAR10_resnet18/FedAdp
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time

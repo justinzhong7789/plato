@@ -66,16 +66,16 @@ data:
     partition_size: 200
 
     # Client's partition size distribution
-    partition_distribution:
-        distribution: uniform
-        low: 0.4
-        high: 1.0
+    # partition_distribution:
+    #     distribution: uniform
+    #     low: 0.4
+    #     high: 1.0
 
     # IID or non-IID?
-    sampler: noniid
+    sampler: iid
 
     # The concentration parameter for the Dirichlet distribution
-    concentration: 0.5
+    # concentration: 0.5
 
     # The random seed for sampling data
     random_seed: 1
