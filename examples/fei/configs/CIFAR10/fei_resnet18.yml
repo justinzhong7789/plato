@@ -65,10 +65,10 @@ data:
     #     high: 1.0
 
     # IID or non-IID?
-    sampler: iid
+    sampler: noniid
 
     # The concentration parameter for the Dirichlet distribution
-    # concentration: 5
+    concentration: 5
 
     # The random seed for sampling data
     random_seed: 1
@@ -87,8 +87,8 @@ trainer:
     target_accuracy: 1.0
 
     # Number of epoches for local training in each communication round
-    epochs: 1
-    batch_size: 128
+    epochs: 5
+    batch_size: 64
     optimizer: SGD
     learning_rate: 0.1
     momentum: 0.9
@@ -119,8 +119,8 @@ algorithm:
     log_interval: 10
     mode: test # test
     pretrained: true
-    pretrained_iter: 60
-    test_step: 100
+    pretrained_iter: 130
+    test_step: 250
 
     # RL policy
     model_name: td3
