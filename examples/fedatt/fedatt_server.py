@@ -45,8 +45,12 @@ class Server(fedavg.Server):
         for name in baseline_weights.keys():
             atts[name] = self.trainer.zeros(len(weights_received))
             for i, update in enumerate(weights_received):
+                # Deal with potential LongTensor in resnet18 model for linalg.norm
                 delta = update[name]
-                atts[name][i] = torch.linalg.norm(-delta)
+                if delta.type() == 'torch.LongTensor':
+                    atts[name][i] = delta.type(torch.FloatTensor)
+                else:
+                    atts[name][i] = torch.linalg.norm(-delta)
 
         for name in baseline_weights.keys():
             atts[name] = F.softmax(atts[name], dim=0)
