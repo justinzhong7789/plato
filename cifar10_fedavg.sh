@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --time=08:00:00
+#SBATCH --time=12:00:00
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=8
 #SBATCH --gres=gpu:2
@@ -10,4 +10,4 @@
 
 module load gcc/9.3.0 arrow cuda/11 python/3.9 scipy-stack
 source ~/.federated/bin/activate
-./run -c examples/fei/configs/CIFAR10/fedavg_resnet18.yml
+./run -c configs/CIFAR10/fedavg_resnet18.yml
