@@ -3,7 +3,7 @@ clients:
     total_clients: 200
 
     # The number of clients selected in each round
-    per_round: 50
+    per_round: 40
 
     # Should the clients compute test accuracy locally?
     do_test: false
@@ -41,10 +41,13 @@ server:
     simulate_wall_time: true
 
     # What is the minimum number of clients that need to report before aggregation begins?
-    minimum_clients_aggregated: 15
+    minimum_clients_aggregated: 20
 
     # What is the staleness bound, beyond which the server should wait for stale clients?
     staleness_bound: 10
+
+    checkpoint_dir: /data/fei/checkpoints/fei_cifar10
+        model_dir: /data/fei/models/fei_cifar10
 
     random_seed: 1
 
@@ -53,7 +56,7 @@ data:
     datasource: CIFAR10
 
     # Where the dataset is located
-    data_path: ./data
+    data_path: /data/fei/data/CIFAR10
 
     # Number of samples in each partition
     partition_size: 500
@@ -88,7 +91,7 @@ trainer:
 
     # Number of epoches for local training in each communication round
     epochs: 5
-    batch_size: 128
+    batch_size: 64
     optimizer: SGD
     learning_rate: 0.1
     momentum: 0.9
@@ -146,7 +149,7 @@ algorithm:
     recurrent_actor: true
 
 results:
-    result_dir: ./results/CIFAR10_resnet18
+    result_dir: /data/fei/results/CIFAR10_resnet18
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time
