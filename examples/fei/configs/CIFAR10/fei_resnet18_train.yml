@@ -3,7 +3,7 @@ clients:
     total_clients: 200
 
     # The number of clients selected in each round
-    per_round: 40
+    per_round: 50
 
     # Should the clients compute test accuracy locally?
     do_test: false
@@ -41,13 +41,13 @@ server:
     simulate_wall_time: true
 
     # What is the minimum number of clients that need to report before aggregation begins?
-    minimum_clients_aggregated: 20
+    minimum_clients_aggregated: 50
 
     # What is the staleness bound, beyond which the server should wait for stale clients?
     staleness_bound: 10
 
     checkpoint_dir: /data/fei/checkpoints/fei_cifar10
-        model_dir: /data/fei/models/fei_cifar10
+    model_dir: /data/fei/models/fei_cifar10
 
     random_seed: 1
 
