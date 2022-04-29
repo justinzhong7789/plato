@@ -1,7 +1,4 @@
 clients:
-    # Type
-    type: simple
-
     # The total number of clients
     total_clients: 100
 
@@ -33,7 +30,7 @@ clients:
 
 server:
     address: 127.0.0.1
-    port: 8001
+    port: 8002
 
     # Should we operate in sychronous mode?
     synchronous: false
@@ -48,8 +45,8 @@ server:
     staleness_bound: 10
 
     # The paths for storing temporary checkpoints and models
-    checkpoint_dir: /data/fei/checkpoints/CIFAR10_vgg16/FedAvg
-    model_dir: /data/fei/models/CIFAR10_vgg16/FedAvg
+    checkpoint_dir: /data/fei/checkpoints/CIFAR10_vgg16/AFL
+    model_dir: /data/fei/models/CIFAR10_vgg16/AFL
 
     random_seed: 1
 
@@ -79,9 +76,6 @@ data:
     random_seed: 1
 
 trainer:
-    # The type of the trainer
-    type: basic
-
     # The maximum number of training rounds
     rounds: 250
 
@@ -110,8 +104,15 @@ algorithm:
     # Aggregation algorithm
     type: fedavg
 
+    # The proportion of clients with the smallest valuations to be set to negative infinities
+    alpha1: 0.75
+    # The softmax temperature used in distribution
+    alpha2: 0.01
+    # The proportion of clients which are selected uniformly at random
+    alpha3: 0.1
+
 results:
-    result_dir: /data/fei/results/CIFAR10_vgg16/FedAvg
+    result_dir: /data/fei/results/CIFAR10_vgg16/AFL
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time

@@ -33,7 +33,7 @@ clients:
 
 server:
     address: 127.0.0.1
-    port: 8001
+    port: 8004
 
     # Should we operate in sychronous mode?
     synchronous: false
@@ -48,8 +48,8 @@ server:
     staleness_bound: 10
 
     # The paths for storing temporary checkpoints and models
-    checkpoint_dir: /data/fei/checkpoints/CIFAR10_vgg16/FedAvg
-    model_dir: /data/fei/models/CIFAR10_vgg16/FedAvg
+    checkpoint_dir: /data/fei/checkpoints/CIFAR10_vgg16/FedAtt
+    model_dir: /data/fei/models/CIFAR10_vgg16/FedAtt
 
     random_seed: 1
 
@@ -110,8 +110,14 @@ algorithm:
     # Aggregation algorithm
     type: fedavg
 
+    # Step size for aggregation used in FedAtt
+    epsilon: 1.2
+
+    # The magnitude of normal noise in the randomization mechanism used in FedAtt
+    dp: 0.001
+
 results:
-    result_dir: /data/fei/results/CIFAR10_vgg16/FedAvg
+    result_dir: /data/fei/results/CIFAR10_vgg16/FedAtt
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time

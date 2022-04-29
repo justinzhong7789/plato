@@ -33,7 +33,7 @@ clients:
 
 server:
     address: 127.0.0.1
-    port: 8001
+    port: 8003
 
     # Should we operate in sychronous mode?
     synchronous: false
@@ -48,8 +48,8 @@ server:
     staleness_bound: 10
 
     # The paths for storing temporary checkpoints and models
-    checkpoint_dir: /data/fei/checkpoints/CIFAR10_vgg16/FedAvg
-    model_dir: /data/fei/models/CIFAR10_vgg16/FedAvg
+    checkpoint_dir: /data/fei/checkpoints/CIFAR10_vgg16/FedAdp
+    model_dir: /data/fei/models/CIFAR10_vgg16/FedAdp
 
     random_seed: 1
 
@@ -110,8 +110,11 @@ algorithm:
     # Aggregation algorithm
     type: fedavg
 
+    # Decreasing rate of the mapping function used in FedAdp
+    alpha: 5
+
 results:
-    result_dir: /data/fei/results/CIFAR10_vgg16/FedAvg
+    result_dir: /data/fei/results/CIFAR10_vgg16/FedAdp
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time
