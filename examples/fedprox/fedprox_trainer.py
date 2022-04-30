@@ -17,7 +17,7 @@ from plato.trainers import basic
 
 def flatten_weights_from_model(model):
     """ Return the weights of the given model as a 1-D tensor """
-    weights = torch.tensor([], requires_grad=False)
+    weights = torch.tensor([], requires_grad=False).to(Config().device())
     for param in model.parameters():
         weights = torch.cat((weights, torch.flatten(param)))
     return weights
@@ -27,7 +27,7 @@ class FedProxLocalObjective:
     """ Representing the local objective of FedProx clients. """
 
     def __init__(self, model):
-        self.model = model.cpu()
+        self.model = model
         self.init_global_weights = flatten_weights_from_model(model)
 
     def compute_objective(self, outputs, labels):
