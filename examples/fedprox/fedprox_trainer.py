@@ -27,7 +27,7 @@ class FedProxLocalObjective:
     """ Representing the local objective of FedProx clients. """
 
     def __init__(self, model):
-        self.model = model
+        self.model = model.cpu()
         self.init_global_weights = flatten_weights_from_model(model)
 
     def compute_objective(self, outputs, labels):
