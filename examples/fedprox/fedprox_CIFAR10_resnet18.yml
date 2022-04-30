@@ -53,6 +53,10 @@ server:
     # What is the staleness bound, beyond which the server should wait for stale clients?
     staleness_bound: 10
 
+    # The paths for storing temporary checkpoints and models
+    checkpoint_dir: /data/fei/checkpoints/CIFAR10_resnet18/FedProx
+    model_dir: /data/fei/models/CIFAR10_resnet18/FedProx
+
     random_seed: 1
 
 data:
@@ -60,7 +64,7 @@ data:
     datasource: CIFAR10
 
     # Where the dataset is located
-    data_path: ./data
+    data_path: /data/fei/data/CIFAR10
 
     # Number of samples in each partition
     partition_size: 500
@@ -91,7 +95,7 @@ trainer:
     parallelized: true
 
     # The maximum number of clients running concurrently
-    max_concurrency: 4
+    max_concurrency: 5
 
     # The target accuracy
     target_accuracy: 1.0
@@ -117,7 +121,7 @@ algorithm:
     type: fedavg
 
 results:
-    result_dir: ./results/CIFAR10_resnet18/FedProx
+    result_dir: /data/fei/results/CIFAR10_resnet18/FedProx
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time
