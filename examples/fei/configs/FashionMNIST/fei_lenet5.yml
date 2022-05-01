@@ -47,7 +47,7 @@ server:
     # The paths for storing temporary checkpoints and models
     checkpoint_dir: /data/fei/checkpoints/FashionMNIST_lenet5/FEI
     model_dir: /data/fei/models/FashionMNIST_lenet5/FEI
-    
+
     random_seed: 1
 
 data:
@@ -70,14 +70,14 @@ data:
     sampler: noniid
 
     # The concentration parameter for the Dirichlet distribution
-    concentration: 0.01
+    concentration: 0.1
 
     # The random seed for sampling data
     random_seed: 1
 
 trainer:
     # The maximum number of training rounds
-    rounds: 100
+    rounds: 500
 
     # Whether the training should use multiple GPUs if available
     parallelized: true
@@ -117,7 +117,7 @@ algorithm:
     mode: test # test
     pretrained: true
     pretrained_iter: 130
-    test_step: 100
+    test_step: 500
 
     # RL policy
     model_name: td3
