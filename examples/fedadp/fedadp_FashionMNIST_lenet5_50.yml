@@ -3,10 +3,10 @@ clients:
     type: simple
 
     # The total number of clients
-    total_clients: 100
+    total_clients: 200
 
     # The number of clients selected in each round
-    per_round: 10
+    per_round: 50
 
     # Should the clients compute test accuracy locally?
     do_test: false
@@ -33,7 +33,7 @@ clients:
 
 server:
     address: 127.0.0.1
-    port: 8020
+    port: 8032
 
     # Should we operate in sychronous mode?
     synchronous: false
@@ -42,14 +42,14 @@ server:
     simulate_wall_time: true
 
     # What is the minimum number of clients that need to report before aggregation begins?
-    minimum_clients_aggregated: 10
+    minimum_clients_aggregated: 50
 
     # What is the staleness bound, beyond which the server should wait for stale clients?
     staleness_bound: 10
 
     # The paths for storing temporary checkpoints and models
-    checkpoint_dir: /data/fei/checkpoints/FashionMNIST_lenet5/FedAvg
-    model_dir: /data/fei/models/FashionMNIST_lenet5/FedAvg
+    checkpoint_dir: /data/fei/checkpoints/FashionMNIST_lenet5/FedAdp
+    model_dir: /data/fei/models/FashionMNIST_lenet5/FedAdp
 
     random_seed: 1
 
@@ -109,8 +109,11 @@ algorithm:
     # Aggregation algorithm
     type: fedavg
 
+    # Decreasing rate of the mapping function used in FedAdp
+    alpha: 5
+
 results:
-    result_dir: /data/fei/results/FashionMNIST_lenet5/FedAvg
+    result_dir: /data/fei/results/FashionMNIST_lenet5/FedAdp_50
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time
