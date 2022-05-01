@@ -33,7 +33,7 @@ clients:
 
 server:
     address: 127.0.0.1
-    port: 8000
+    port: 8023
 
     # Should we operate in sychronous mode?
     synchronous: false
@@ -47,6 +47,10 @@ server:
     # What is the staleness bound, beyond which the server should wait for stale clients?
     staleness_bound: 10
 
+    # The paths for storing temporary checkpoints and models
+    checkpoint_dir: /data/fei/checkpoints/FashionMNIST_lenet5/FedAtt
+    model_dir: /data/fei/models/FashionMNIST_lenet5/FedAtt
+
     random_seed: 1
 
 data:
@@ -54,7 +58,7 @@ data:
     datasource: FashionMNIST
 
     # Where the dataset is located
-    data_path: ./data
+    data_path: /data/fei/data/FashionMNIST
 
     # Number of samples in each partition
     partition_size: 200
@@ -66,10 +70,10 @@ data:
     #     high: 1.0
 
     # IID or non-IID?
-    sampler: iid
+    sampler: noniid
 
     # The concentration parameter for the Dirichlet distribution
-    # concentration: 0.5
+    concentration: 0.01
 
     # The random seed for sampling data
     random_seed: 1
@@ -85,7 +89,7 @@ trainer:
     parallelized: true
 
     # The maximum number of clients running concurrently
-    max_concurrency: 4
+    max_concurrency: 5
 
     # The target accuracy
     target_accuracy: 1.0
@@ -112,7 +116,7 @@ algorithm:
     dp: 0.001
 
 results:
-    result_dir: ./results/FashionMNIST_lenet5/FedAtt
+    result_dir: /data/fei/results/FashionMNIST_lenet5/FedAtt
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time
