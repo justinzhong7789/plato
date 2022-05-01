@@ -31,9 +31,15 @@ clients:
     
     random_seed: 1
 
+    # FedProx hyperparameters
+    proximal_term_penalty_constant: 0
+    # FedProx parameters for experiment
+    straggler_simulation: false
+    # straggler_percentage: 50
+
 server:
     address: 127.0.0.1
-    port: 8033
+    port: 8044
 
     # Should we operate in sychronous mode?
     synchronous: false
@@ -48,8 +54,8 @@ server:
     staleness_bound: 10
 
     # The paths for storing temporary checkpoints and models
-    checkpoint_dir: /data/fei/checkpoints/FashionMNIST_lenet5/FedAtt
-    model_dir: /data/fei/models/FashionMNIST_lenet5/FedAtt
+    checkpoint_dir: /data/fei/checkpoints/FashionMNIST_lenet5/FedProx
+    model_dir: /data/fei/models/FashionMNIST_lenet5/FedProx
 
     random_seed: 1
 
@@ -73,7 +79,7 @@ data:
     sampler: noniid
 
     # The concentration parameter for the Dirichlet distribution
-    concentration: 5
+    concentration: 0.5
 
     # The random seed for sampling data
     random_seed: 1
@@ -104,19 +110,14 @@ trainer:
 
     # The machine learning model
     model_name: lenet5
+    num_classes: 47
 
 algorithm:
     # Aggregation algorithm
     type: fedavg
 
-    # Step size for aggregation used in FedAtt
-    epsilon: 1.2
-
-    # The magnitude of normal noise in the randomization mechanism used in FedAtt
-    dp: 0.001
-
 results:
-    result_dir: /data/fei/results/FashionMNIST_lenet5/FedAtt_50
+    result_dir: /data/fei/results/FashionMNIST_lenet5/FedProx_50
 
     # Write the following parameter(s) into a CSV
     types: round, accuracy, elapsed_time, comm_time, round_time

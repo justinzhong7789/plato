@@ -30,7 +30,7 @@ clients:
 
 server:
     address: 127.0.0.1
-    port: 8035
+    port: 8000
 
     # Should we operate in sychronous mode?
     synchronous: false
@@ -70,7 +70,7 @@ data:
     sampler: noniid
 
     # The concentration parameter for the Dirichlet distribution
-    concentration: 0.1
+    concentration: 0.5
 
     # The random seed for sampling data
     random_seed: 1
