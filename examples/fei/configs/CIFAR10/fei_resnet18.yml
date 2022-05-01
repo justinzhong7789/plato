@@ -30,7 +30,7 @@ clients:
 
 server:
     address: 127.0.0.1
-    port: 8000
+    port: 8008
     ping_timeout: 3600000
     ping_interval: 3600000
 
