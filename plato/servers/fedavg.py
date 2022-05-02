@@ -23,7 +23,11 @@ class Server(base.Server):
 
         self.model = model
         self.algorithm = algorithm
-        self.trainer = trainer
+        
+        if trainer is not None:
+            self.trainer = trainer()
+        else:
+            self.trainer = None
 
         self.datasource = None
         self.testset = None
