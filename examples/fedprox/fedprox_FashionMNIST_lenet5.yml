@@ -76,10 +76,10 @@ data:
     #     high: 1.0
 
     # IID or non-IID?
-    sampler: noniid
+    sampler: iid
 
     # The concentration parameter for the Dirichlet distribution
-    concentration: 0.5
+    # concentration: 0.2
 
     # The random seed for sampling data
     random_seed: 1

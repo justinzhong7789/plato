@@ -77,7 +77,7 @@ data:
 
 trainer:
     # The maximum number of training rounds
-    rounds: 200
+    rounds: 100
 
     # Whether the training should use multiple GPUs if available
     parallelized: true
@@ -116,8 +116,8 @@ algorithm:
     log_interval: 10
     mode: test # test
     pretrained: true
-    pretrained_iter: 60
-    test_step: 200
+    pretrained_iter: 130
+    test_step: 100
 
     # RL policy
     model_name: td3

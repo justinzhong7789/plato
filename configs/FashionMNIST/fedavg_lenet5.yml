@@ -73,7 +73,7 @@ data:
     sampler: noniid
 
     # The concentration parameter for the Dirichlet distribution
-    concentration: 0.5
+    concentration: 0.2
 
     # The random seed for sampling data
     random_seed: 1
@@ -83,7 +83,7 @@ trainer:
     type: basic
 
     # The maximum number of training rounds
-    rounds: 200
+    rounds: 100
 
     # Whether the training should use multiple GPUs if available
     parallelized: true
