@@ -1,0 +1,115 @@
+clients:
+    # Type
+    type: simple
+
+    # The total number of clients
+    total_clients: 200
+
+    # The number of clients selected in each round
+    per_round: 20
+
+    # Should the clients compute test accuracy locally?
+    do_test: false
+
+    # Whether clients should be simulated with only a sufficient number of processes
+    simulation: true
+
+    # Whether client-server communication should be simulated with files
+    comm_simulation: true
+    
+    random_seed: 1
+
+    # FedProx hyperparameters
+    proximal_term_penalty_constant: 1
+    # FedProx parameters for experiment
+    straggler_simulation: false
+    straggler_percentage: 50
+
+server:
+    address: 127.0.0.1
+    port: 8043
+
+    ping_timeout: 36000
+    ping_interval: 36000
+
+    # Should we operate in sychronous mode?
+    # synchronous: false
+
+    # Should we simulate the wall-clock time on the server? Useful if max_concurrency is specified
+    simulate_wall_time: true
+
+    # What is the minimum number of clients that need to report before aggregation begins?
+    # minimum_clients_aggregated: 20
+
+    # What is the staleness bound, beyond which the server should wait for stale clients?
+    # staleness_bound: 10
+
+    # The paths for storing temporary checkpoints and models
+    checkpoint_dir: /data/fei/checkpoints/
+    model_dir: /data/fei/models/
+
+    random_seed: 1
+
+data:
+    # The training and testing dataset
+    datasource: EMNIST
+
+    # Where the dataset is located
+    data_path: /data/fei/data/
+
+    # Number of samples in each partition
+    partition_size: 1000
+
+    # Client's partition size distribution
+    # partition_distribution:
+    #     distribution: uniform
+    #     low: 0.4
+    #     high: 1.0
+
+    # IID or non-IID?
+    sampler: iid
+
+    # The concentration parameter for the Dirichlet distribution
+    # concentration: 5
+
+    # The random seed for sampling data
+    random_seed: 1
+
+trainer:
+    # The type of the trainer
+    type: basic
+
+    # The maximum number of training rounds
+    rounds: 20
+
+    # Whether the training should use multiple GPUs if available
+    parallelized: false
+
+    # The maximum number of clients running concurrently
+    max_concurrency: 5
+
+    # The target accuracy
+    target_accuracy: 1.0
+
+    # Number of epoches for local training in each communication round
+    epochs: 5
+    batch_size: 10
+    optimizer: SGD
+    learning_rate: 0.01
+    momentum: 0.9
+    weight_decay: 0.0
+
+    # The machine learning model
+    model_name: lenet5
+    num_classes: 47
+
+algorithm:
+    # Aggregation algorithm
+    type: fedavg
+
+results:
+    result_dir: /data/fei/results/EMNIST_lenet5/FedProx
+
+    # Write the following parameter(s) into a CSV
+    types: round, accuracy, elapsed_time, comm_time, round_time
+
