@@ -128,7 +128,7 @@ class RLAgent(rl_agent.RLAgent):
         if Config().algorithm.mode == 'train':
             self.pre_acc.append(self.test_accuracy)
             # if stdev(self.pre_acc) < Config().algorithm.theta:
-            if self.current_step > Config().algorithm.steps_per_episode:
+            if self.current_step >= Config().algorithm.steps_per_episode:
                 logging.info("[RL Agent] Episode #%d ended.",
                              self.current_episode)
                 return True
@@ -197,8 +197,8 @@ class RLAgent(rl_agent.RLAgent):
         ])
 
         # Reinitialize the previous accuracy queue
-        for _ in range(Config().algorithm.steps_per_episode):
-            self.pre_acc.append(0)
+        # for _ in range(Config().algorithm.steps_per_episode):
+        #     self.pre_acc.append(0)
 
         if self.current_episode % Config().algorithm.log_interval == 0:
             self.policy.save_model(self.current_episode)
