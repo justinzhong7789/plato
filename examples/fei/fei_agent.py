@@ -54,18 +54,11 @@ class RLAgent(rl_agent.RLAgent):
                 ['episode', 'step', 'id', 'action', 'state'], result_dir)
 
         # Record test accuracy of the latest 5 rounds/steps
-        self.pre_acc = deque(Config().algorithm.steps_per_episode * [0], maxlen=Config().algorithm.steps_per_episode)
+        self.pre_acc = deque(Config().algorithm.steps_per_episode * [0],
+                             maxlen=Config().algorithm.steps_per_episode)
         self.test_accuracy = None
         self.num_samples = None
         self.client_ids = []
-
-    # Override RL-related methods of simple RL agent
-    async def reset(self):
-        """ Reset RL environment. """
-        await super().reset()
-
-        if Config().algorithm.recurrent_actor:
-            self.h, self.c = self.policy.get_initial_states()
 
     def get_state(self):
         """ Get state for agent. """
@@ -125,8 +118,9 @@ class RLAgent(rl_agent.RLAgent):
         if self.is_done:
             # avg_accuracy = mean(self.pre_acc)
             # reward += math.log(avg_accuracy /
-                            #    (1 - avg_accuracy)) * Config().algorithm.beta
-            reward = (1 + self.test_accuracy - self.pre_acc[0]) ** Config().algorithm.beta
+            #    (1 - avg_accuracy)) * Config().algorithm.beta
+            reward = (1 + self.test_accuracy -
+                      self.pre_acc[0])**Config().algorithm.beta
         return reward
 
     def get_done(self):
@@ -155,7 +149,8 @@ class RLAgent(rl_agent.RLAgent):
 
         if Config().algorithm.recurrent_actor:
             self.h, self.c = self.nh, self.nc
-    
+
+    # Override RL-related methods of simple RL agent
     async def reset(self):
         """ Reset RL environment. """
         # Start a new training session
@@ -169,6 +164,10 @@ class RLAgent(rl_agent.RLAgent):
         # Restart federated learning env when accuracy is stable
         if stdev(self.pre_acc) < Config().algorithm.theta:
             self.reset_env = True
+
+            if Config().algorithm.recurrent_actor:
+                self.h, self.c = self.policy.get_initial_states()
+
         logging.info("[RL Agent] Starting RL episode #%d.",
                      self.current_episode)
 
