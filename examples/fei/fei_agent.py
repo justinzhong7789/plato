@@ -54,7 +54,7 @@ class RLAgent(rl_agent.RLAgent):
                 ['episode', 'step', 'id', 'action', 'state'], result_dir)
 
         # Record test accuracy of the latest 5 rounds/steps
-        self.pre_acc = deque(5 * [0], maxlen=5)
+        self.pre_acc = deque(Config().algorithm.steps_per_episode * [0], maxlen=Config().algorithm.steps_per_episode)
         self.test_accuracy = None
         self.num_samples = None
         self.client_ids = []
@@ -134,7 +134,7 @@ class RLAgent(rl_agent.RLAgent):
         if Config().algorithm.mode == 'train':
             self.pre_acc.append(self.test_accuracy)
             # if stdev(self.pre_acc) < Config().algorithm.theta:
-            if self.current_step >= 3:
+            if self.current_step > Config().algorithm.steps_per_episode:
                 logging.info("[RL Agent] Episode #%d ended.",
                              self.current_episode)
                 return True
@@ -198,7 +198,7 @@ class RLAgent(rl_agent.RLAgent):
         ])
 
         # Reinitialize the previous accuracy queue
-        for _ in range(3):
+        for _ in range(Config().algorithm.steps_per_episode):
             self.pre_acc.append(0)
 
         if self.current_episode % Config().algorithm.log_interval == 0:
