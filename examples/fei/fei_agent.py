@@ -113,7 +113,6 @@ class RLAgent(rl_agent.RLAgent):
         """ Get reward for agent. """
         # punish more time steps
         reward = -1
-        reward = 0
         # reward for average accuracy in the last a few time steps
         if self.is_done:
             avg_accuracy = mean(self.pre_acc)

@@ -96,7 +96,7 @@ algorithm:
     max_episode: 2000
     alpha: 5 # controls the decreasing rate of the mapping function
     beta: 20 # coefficient used in reward function
-    theta: 0.005 # threshold for stdev(pre_acc)
+    theta: 0.01 # threshold for stdev(pre_acc)
     base: 1000 # for exponential function in state normalization
     log_interval: 10
     steps_per_episode: 3
