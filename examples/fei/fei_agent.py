@@ -19,16 +19,14 @@ class RLAgent(rl_agent.RLAgent):
     """ An RL agent for FL training using FEI. """
     def __init__(self):
         super().__init__()
-        if hasattr(Config().server,
-                   'synchronous') and not Config().server.synchronous:
+        if Config().algorithm.recurrent_actor:
             self.policy = policies_registry.get(Config().algorithm.n_features,
                                                 self.n_actions)
+            self.h, self.c = self.policy.get_initial_states()
+            self.nh, self.nc = self.h, self.c
         else:
             self.policy = policies_registry.get(self.n_states, self.n_actions)
 
-        if Config().algorithm.recurrent_actor:
-            self.h, self.c = self.policy.get_initial_states()
-            self.nh, self.nc = self.h, self.c
 
         if Config().algorithm.mode == 'train' and Config(
         ).algorithm.pretrained or Config().algorithm.mode == 'test':
@@ -62,8 +60,7 @@ class RLAgent(rl_agent.RLAgent):
 
     def get_state(self):
         """ Get state for agent. """
-        if hasattr(Config().server,
-                   'synchronous') and not Config().server.synchronous:
+        if Config().algorithm.recurrent_actor:
             return self.new_state
         else:
             return np.squeeze(self.new_state.reshape(1, -1))
